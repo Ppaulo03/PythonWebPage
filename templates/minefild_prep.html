@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+{% block title %}
+<title>MineFild</title>
+{% endblock %}
+{% block body %}
+<div class="section-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="section-container-spacer text-center">
+                    <h1 class="h2">02 : MineField</h1>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <form action="mineField-play" method="POST" class="reveal-content">
+                            <input type="hidden" name='primeiro' value='S'>
+                            <!-- <div class="row">
+                                <div class="form-group">
+                                    <h3>Width:</h3>
+                                    <select name="width">
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                    </select>
+                                </div>
+                                <h3>Heigth:</h3>
+                                <select name="heigth">
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="30">30</option>
+                                </select>
+                            </div>
+                            <br> -->
+                            <div class="col-md-7">
+                                <button type="send" class="btn btn-default btn-lg">Play</button>
+                            </div>
+
+
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

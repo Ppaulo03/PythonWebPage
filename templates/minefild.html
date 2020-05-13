@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+{% block title %}
+<title>MineFild</title>
+{% endblock %}
+{% block body %}
+<div class="section-container">
+    <div class=" container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="section-container-spacer text-center">
+                    <h1 class="h2">02 : MineFild</h1>
+                </div>
+                <div class="row">
+                    {% set jogo = url %}
+                    <form action="" method="POST" class="reveal-content">
+                        <input type="hidden" name='primeiro' value='N'>
+                        <div class="col-md-10 col-md-offset-1">
+                            {% if mark %}
+                            <img src="./static/assets/images/minefild/pá.png" width="60" alt=""> <input type="radio"
+                                name="tipo" value='reveal'>
+                            <img src="./static/assets/images/minefild/flag.jpeg" width="60"> <input type="radio"
+                                name="tipo" value='mark' checked>
+                            {% else %}
+                            <img src="./static/assets/images/minefild/pá.png" width="60"> <input type="radio"
+                                name="tipo" value='reveal' checked>
+                            <img src="./static/assets/images/minefild/flag.jpeg" width="60"><input type="radio"
+                                name="tipo" value='mark'>
+                            {% endif %}
+                            <br>
+                            {% for line in table.tabuleiro %}
+                            {% for cel in line %}
+                            {% if cel.reveal %}
+                            {% if cel.bomba %}
+                            <img src="./static/assets/images/minefild/bomba.jpeg" width="40" height="25" alt="">
+                            {% else %}
+                            <img src="./static/assets/images/minefild/num{{cel.proximidade}}.png" width="40" height="25"
+                                alt="">
+                            {% endif %}
+                            {% else %}
+                            {% if not lose and not win %}
+                            <button class="minabot" method="POST" type="submit" name='info'
+                                value="{{cel.linha, cel.coluna, url}}" style="width:25;height:25">
+                                {% if cel.marked %}
+                                <img src="./static/assets/images/minefild/marked.png" s="25" height="25" alt="">
+                                {% else %}
+                                <img src="./static/assets/images/minefild/tile.png" width="25" height="25" alt="">
+                                {% endif %}
+                            </button>
+                            {% else %}
+                            {% if cel.marked %}
+                            <img src="./static/assets/images/minefild/marked.jpeg" width="40" height="25" alt="">
+                            {% else %}
+                            <img src="./static/assets/images/minefild/tile.png" width="40" height="25" alt="">
+                            {% endif %}
+                            {% endif %}
+                            {% endif %}
+                            {% endfor %}
+                            <br>
+                            {% endfor %}
+                            {% if (win or lose) %}
+                            <br>
+                            <a href="./mineField" title="" class="btn btn-default">Play again</a>
+                            {% if win %}
+                            parabemnnnns
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+{% endblock %}
