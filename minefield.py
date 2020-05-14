@@ -44,6 +44,11 @@ class Tabuleiro():
             self.objetive = num_bombs
             self._create_tabuleiro()
         else:
+            try:
+                with open(txt, mode"w") as teste:
+                    pass
+            except Exception:
+                txt = '/home/peter03/PythonWebPage/' + txt
             with open(txt, mode='r') as jogo:
                 file = jogo.read().splitlines()
                 self.linha = int(file.pop(0))
@@ -156,6 +161,11 @@ class Tabuleiro():
                                     return
 
     def register_game(self, txt):
+        try:
+            with open(txt, mode"w") as teste:
+                pass
+        except Exception:
+            txt = '/home/peter03/PythonWebPage/' + txt
         with open(txt, mode="w") as jogo:
             jogo.write(f'{self.linha}\n')
             jogo.write(f'{self.coluna}\n')
