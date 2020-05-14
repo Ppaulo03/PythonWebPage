@@ -17,6 +17,13 @@
     {% block title %}
     <title>Title page</title>
     {% endblock %}
+    {% block meta %}
+    <meta name="description" content="Sim, eu estava entediado o bastante para aprender a fazer isso...">
+    <meta property="og:title" content="My site" />
+    <meta property="og:url" content="https://www.example.com/webpage/" />
+    <meta property="og:description" content="Nada demais, so um site aleatório">
+    <meta property="og:image" content="./static/assets/images/images.png">
+    {% endblock %}
     <link href="./static/style.css" rel="stylesheet">
 </head>
 
