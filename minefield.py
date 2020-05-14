@@ -45,7 +45,7 @@ class Tabuleiro():
             self._create_tabuleiro()
         else:
             try:
-                with open(txt, mode"w") as teste:
+                with open(txt, mode="w") as teste:
                     pass
             except Exception:
                 txt = '/home/peter03/PythonWebPage/' + txt
@@ -162,7 +162,7 @@ class Tabuleiro():
 
     def register_game(self, txt):
         try:
-            with open(txt, mode"w") as teste:
+            with open(txt, mode="w") as teste:
                 pass
         except Exception:
             txt = '/home/peter03/PythonWebPage/' + txt
