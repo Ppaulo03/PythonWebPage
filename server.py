@@ -35,9 +35,14 @@ def play_mine_fild():
 
         else:
             global minefield_cont
+            tamanho = int(data['Dificuldade'])
             game_url = f'minefild{minefield_cont}.txt'
             minefield_cont += 1
-            jogo = Tabuleiro(30, 16, 99)
+            if minefield_cont == 100:
+                minefield_cont = 0
+                print(tamanho)
+            n_bomb = int((16*tamanho*18.75)/100)
+            jogo = Tabuleiro(tamanho, 16, n_bomb)
             jogo.register_game(f'database/{game_url}')
             return render_template('minefild.html', url=game_url, table=jogo, lose=False, win=False, mark=False)
 

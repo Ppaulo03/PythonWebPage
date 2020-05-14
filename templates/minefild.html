@@ -14,44 +14,63 @@
                     {% set jogo = url %}
                     <form action="" method="POST" class="reveal-content">
                         <input type="hidden" name='primeiro' value='N'>
-                        <div class="col-md-10 col-md-offset-1">
-                            {% if mark %}
-                            <img src="./static/assets/images/minefild/pá.png" width="60" alt=""> <input type="radio"
-                                name="tipo" value='reveal'>
-                            <img src="./static/assets/images/minefild/flag.jpeg" width="60"> <input type="radio"
-                                name="tipo" value='mark' checked>
-                            {% else %}
-                            <img src="./static/assets/images/minefild/pá.png" width="60"> <input type="radio"
-                                name="tipo" value='reveal' checked>
-                            <img src="./static/assets/images/minefild/flag.jpeg" width="60"><input type="radio"
-                                name="tipo" value='mark'>
-                            {% endif %}
+                        <div class="col-md-10 col-md-offset-1" style="overflow: auto; min-width: 600px;">
+                            <h3>
+                                {% if mark %}
+                                <img src="./static/assets/images/minefild/pá.png" style='width:10%'> <input type="radio"
+                                    name="tipo" value='reveal'>
+                                <img src="./static/assets/images/minefild/flag.png" style='width:10%'> <input
+                                    type="radio" name="tipo" value='mark' checked>
+                                {% else %}
+                                <img src="./static/assets/images/minefild/pá.png" style='width:10%'> <input type="radio"
+                                    name="tipo" value='reveal' checked>
+                                <img src="./static/assets/images/minefild/flag.png" style='width:10%'><input
+                                    type="radio" name="tipo" value='mark'>
+                                {% endif %}
+                                <img src="./static/assets/images/minefild/bomba_sem .png" style='width:100%'>
+                                Bombs:{{table.objetive}} Flags:{{table.num_marks}}</h3>
                             <br>
                             {% for line in table.tabuleiro %}
+                            {% set cotroler = loop.index %}
                             {% for cel in line %}
+                            {% set x = (loop.index+cotroler)%2==0 %}
                             {% if cel.reveal %}
-                            {% if cel.bomba %}
-                            <img src="./static/assets/images/minefild/bomba.jpeg" width="40" height="25" alt="">
-                            {% else %}
-                            <img src="./static/assets/images/minefild/num{{cel.proximidade}}.png" width="40" height="25"
-                                alt="">
-                            {% endif %}
-                            {% else %}
-                            {% if not lose and not win %}
-                            <button class="minabot" method="POST" type="submit" name='info'
-                                value="{{cel.linha, cel.coluna, url}}" style="width:25;height:25">
-                                {% if cel.marked %}
-                                <img src="./static/assets/images/minefild/marked.png" s="25" height="25" alt="">
-                                {% else %}
-                                <img src="./static/assets/images/minefild/tile.png" width="25" height="25" alt="">
-                                {% endif %}
+                            <button class="minabot" disabled>
+                                <div class="row">
+                                    {% if cel.bomba %}
+                                    <img src="./static/assets/images/minefild/bomb.png"
+                                        style="width: 100%; height: 100%;" alt="bomba">
+                                    {% else %}
+                                    <img src="./static/assets/images/minefild/num{{cel.proximidade}}{{x}}.png"
+                                        style="width: 100%; height: 100%;" alt="{{cel.proximidade}}">
+                                    {% endif %}
+                                </div>
                             </button>
                             {% else %}
-                            {% if cel.marked %}
-                            <img src="./static/assets/images/minefild/marked.jpeg" width="40" height="25" alt="">
+                            {% if not lose and not win %}
+                            <button class=" minabot" type="submit" name='info' value="{{cel.linha, cel.coluna, url}}">
+                                <div class="row">
+                                    {% if cel.marked %}
+                                    <img src="./static/assets/images/minefild/flag{{x}}.png"
+                                        style="width: 100%; height: 100%;" alt="flag">
+                                    {% else %}
+                                    <img src="./static/assets/images/minefild/tile{{x}}.png"
+                                        style="width: 100%; height: 100%;" alt="tile">
+                                    {% endif %}
+                                </div>
+                            </button>
                             {% else %}
-                            <img src="./static/assets/images/minefild/tile.png" width="40" height="25" alt="">
-                            {% endif %}
+                            <button class="minabot" style="width: 5%; height: 5%" disabled>
+                                <div class="row">
+                                    {% if cel.marked %}
+                                    <img src="./static/assets/images/minefild/flag{{x}}.png"
+                                        style="width: 100%; height: 100%;" alt="flag">
+                                    {% else %}
+                                    <img src="./static/assets/images/minefild/tile{{x}}.png"
+                                        style="width: 100%; height: 100%;" alt="tile">
+                                    {% endif %}
+                                </div>
+                            </button>
                             {% endif %}
                             {% endif %}
                             {% endfor %}
