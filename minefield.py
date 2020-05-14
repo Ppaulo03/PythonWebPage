@@ -45,7 +45,7 @@ class Tabuleiro():
             self._create_tabuleiro()
         else:
             try:
-                with open(txt, mode="w") as teste:
+                with open(txt, mode="r") as teste:
                     pass
             except Exception:
                 txt = '/home/peter03/PythonWebPage/' + txt
