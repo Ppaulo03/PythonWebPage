@@ -20,7 +20,7 @@
     {% block meta %}
     <meta name="description" content="Sim, eu estava entediado o bastante para aprender a fazer isso...">
     <meta property="og:title" content="My site" />
-    <meta property="og:url" content="https://www.example.com/webpage/" />
+    <meta property="og:url" content="http://peter03.pythonanywhere.com/" />
     <meta property="og:description" content="Nada demais, so um site aleatório">
     <meta property="og:image" content="./static/assets/images/images.png">
     {% endblock %}
@@ -49,8 +49,8 @@
                     <ul class="nav navbar-nav ">
                         <li><a href="./index.html" title="">01 : Home</a></li>
                         <li><a href="./games.html" title="">02 : Games</a></li>
-                        <!-- <li><a href="./about.html" title="">03 : About me</a></li>
-                        <li><a href="./contact.html" title="">04 : Contact</a></li> -->
+                        <li><a href="./projects.html" title="">03 : Projects</a></li>
+                        <!-- <li><a href="./contact.html" title="">04 : Contact</a></li> -->
                     </ul>
 
 
@@ -71,6 +71,8 @@
 
 
     <script type="text/javascript" src="./static/script.js"></script>
+    {% block scripts %}
+    {% endblock %}
 </body>
 
 </html>

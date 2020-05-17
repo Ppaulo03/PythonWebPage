@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block title %}
+<title>Sudoku Solver</title>
+{% endblock %}
+{% block body %}
+<div class="section-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="section-container-spacer text-center">
+                    <h1 class="h2">Sudoku Solver</h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <p>
+                            <font size=2>
+                                Hallo, this is a sudoku solver that I made in 2020 for a code challenge.</font>
+
+                        </p>
+                        <form action="solve_sudoku" method="POST" class="reveal-content">
+                            <div class>
+                                <div class="form-group sudoku">
+                                    {% for y in range(9) %}
+
+                                    {% if not y%3 %} <br> {% endif %}
+
+                                    {% for x in range(9) %}
+                                    {% if not x%3 %} &nbsp;&nbsp; {% endif %}
+                                    <input type="text" maxlength="1" name="{{ (x, y) }}"
+                                        oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+                                    {% endfor %}<br>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <br>
+                            <div class=" col-md-7">
+                                <button type="send" class="btn btn-default btn-lg">Play</button>
+                            </div>
+
+
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

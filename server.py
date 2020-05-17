@@ -1,8 +1,22 @@
 from flask import Flask, render_template, request, redirect
-import csv
 from minefield import Tabuleiro, show
+from sudoku import *
+import csv
 import pdb
 app = Flask(__name__)
+
+
+@app.after_request
+def add_header(r):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'public, max-age=0'
+    return r
 
 
 @app.route('/')
@@ -76,5 +90,27 @@ def subm():
         data = request.form.to_dict()
         write_to_csv(data)
         return redirect('/thanks.html')
+    else:
+        return 'Something gone wrong'
+
+
+@app.route('/solve_sudoku', methods=['POST', 'GET'])
+def sudoku_solver():
+    if request.method == 'POST':
+        data = request.form.to_dict()
+        matz = [[None for x in range(9)] for y in range(9)]
+        prench = list()
+        for cord, num in data.items():
+            cord = cord.replace(
+                "(", "").replace(")", "").split(",")
+            cord[0], cord[1] = int(cord[0]), int(cord[1])
+            matz[cord[1]][cord[0]] = num
+
+            if num != "":
+                prench.append(cord)
+
+        res, sol = solve_sudoku(matz)
+        print(prench)
+        return render_template('solving_sudo.html', res=res, sud=sol, org=matz, pren=prench)
     else:
         return 'Something gone wrong'

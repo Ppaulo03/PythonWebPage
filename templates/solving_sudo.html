@@ -1,0 +1,142 @@
+{% extends "layout.html" %}
+{% block title %}
+<title>Sudoku Solver</title>
+{% endblock %}
+{% block body %}
+<div class="section-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="section-container-spacer text-center">
+                    <h1 class="h2">Sudoku Solver</h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1" style="overflow: auto; width: 800px;">
+                        <p>
+                            <font size=2>
+                                Hallo, this is a sudoku solver that I made in 2020 for a code challenge.</font>
+
+                        </p>
+                        <form action="solve_sudoku" method="POST" class="reveal-content">
+                            <div class="form-group sudoku">
+                                {% if res == 0 %}
+
+                                <h2>Soluction: </h2>
+                                {% for line in sud %} {% set y = loop.index - 1 %}
+                                {% if not y%3 %} <br> {% endif %}
+                                {% for num in line %} {% set x = loop.index - 1 %}
+                                {% if not x%3 %} &nbsp;&nbsp; {% endif %}
+                                {% if [y,x] in pren %}
+                                <input type="text" maxlength="1" id="{{ (x, y) }}" name="{{ (x, y) }}" value={{num}}
+                                    oninput="this.value=this.value.replace(/[^0-9]/g,'');" style="color:green">
+                                {% else %}
+                                <input type="text" maxlength="1" id="{{ (x, y) }}" name="{{ (x, y) }}" value={{num}}
+                                    oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+                                {% endif %}
+                                {% endfor %}<br>
+                                {% endfor %}
+
+                                {% elif res == 1 %}
+
+                                <h2>Mutiple soluctions: </h2><br>
+                                <h3>Possible soluction:</h3>
+                                {% for line in sud %} {% set y = loop.index - 1 %}
+                                {% if not y%3 %} <br> {% endif %}
+                                {% for num in line %} {% set x = loop.index - 1 %}
+                                {% if not x%3 %} &nbsp;&nbsp; {% endif %}
+
+                                <input type="text" maxlength="1" id="{{ (x, y) }}" name="{{ (x, y) }}" value={{num}}
+                                    oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+                                {% endfor %}<br>
+                                {% endfor %}
+
+                                {% elif res == 2 %}
+
+                                <h3>Unresovable Sudoku </h3><br>
+                                {% for line in org %} {% set y = loop.index - 1 %}
+                                {% if not y%3 %} <br> {% endif %}
+                                {% for num in line %} {% set x = loop.index - 1 %}
+                                {% if not x%3 %} &nbsp;&nbsp; {% endif %}
+                                {% if num != "" %}
+
+                                <input type="text" maxlength="1" id="{{ (x, y) }}" name="{{ (x, y) }}" value={{num}}
+                                    oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+                                {% else %}
+                                <input type="text" maxlength="1" id="{{ (x, y) }}" name="{{ (x, y) }}"
+                                    oninput="this.value=this.value.replace(/[^0-9]/g,'');0">
+
+                                {% endif %}
+                                {% endfor %}<br>
+                                {% endfor %}
+
+                                {% elif res == 3 %}
+
+                                <h3>Little information in the Sudoku </h3><br>
+                                {% for line in org %} {% set y = loop.index - 1 %}
+                                {% if not y%3 %} <br> {% endif %}
+                                {% for num in line %} {% set x = loop.index - 1 %}
+                                {% if not x%3 %} &nbsp;&nbsp; {% endif %}
+                                {% if num != "" %}
+
+                                <input type="text" maxlength="1" id="{{ (x, y) }}" name="{{ (x, y) }}" value={{num}}
+                                    oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+                                {% else %}
+                                <input type="text" maxlength="1" id="{{ (x, y) }}" name="{{ (x, y) }}"
+                                    oninput="this.value=this.value.replace(/[^0-9]/g,'');0">
+                                {% endif %}
+
+                                {% endfor %}<br>
+                                {% endfor %}
+
+                                {% else %}
+
+                                <h3>Conflicts in the Sudoku </h3><br>
+                                {% for line in org %} {% set y = loop.index - 1 %}
+                                {% if not y%3 %} <br> {% endif %}
+                                {% for num in line %} {% set x = loop.index - 1 %}
+                                {% if not x%3 %} &nbsp;&nbsp; {% endif %}
+                                {% if num != "" %}
+
+                                {% if (y,x) in sud %}
+                                <input type="text" maxlength="1" id="{{ (x, y) }}" name="{{ (x, y) }}" value='{{num}}'
+                                    oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                                    style='background-color: red;'>
+
+                                {% else %}
+                                <input type="text" maxlength="1" id="{{ (x, y) }}" name="{{ (x, y) }}" value={{num}}
+                                    oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                                    style='background-color: white;'>
+                                {% endif %}
+
+                                {% else %}
+                                <input type="text" maxlength="1" id="{{ (x, y) }}" name="{{ (x, y) }}" value=''
+                                    oninput="this.value=this.value.replace(/[^0-9]/g,'');0">
+                                {% endif %}
+
+                                {% endfor %}<br>
+                                {% endfor %}
+
+                                {% endif %}
+                            </div>
+                            <br>
+                            <div class=" col-md-7">
+                                <button type="send" class="btn btn-default btn-lg">Resolve</button>
+                                <button type="button" class="btn btn-default btn-lg">Clear Soluction</button>
+                                <button type="button" class="btn btn-default btn-lg" onclick="ClearFields();">Clear
+                                    All</button>
+                            </div>
+
+
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="./static/clear.js"></script>
+{% endblock %}

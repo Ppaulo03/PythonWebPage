@@ -311,7 +311,7 @@ html {
 
 body {
     font-family: Roboto Mono, Helvetica, Arial, sans-serif;
-    font-size: 11px;
+    font-size: 100%;
     line-height: 1.78;
     color: #000;
     background-color: #fff
@@ -5943,6 +5943,15 @@ textarea {
     height: 1;
     margin: auto 0px;   
 }
-
+.sudoku input{
+    font-size: 2rem; 
+    text-align: center; 
+    font-weight: bold; 
+    padding: 0;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    width:5%
+    
+}
 
 /*# sourceMappingURL=main.70a66962.map*/
