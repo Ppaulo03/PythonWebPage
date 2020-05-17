@@ -10,7 +10,7 @@
                 <div class="section-container-spacer text-center">
                     <h1 class="h2">Sudoku Solver</h1>
                 </div>
-                <div class="row">
+                <div class="centralizar">
                     <div class="col-md-10 col-md-offset-1" style="overflow: auto; width: 800px;">
                         <p>
                             <font size=2>
@@ -26,11 +26,11 @@
                                 {% if not y%3 %} <br> {% endif %}
                                 {% for num in line %} {% set x = loop.index - 1 %}
                                 {% if not x%3 %} &nbsp;&nbsp; {% endif %}
-                                {% if [y,x] in pren %}
-                                <input type="text" maxlength="1" id="{{ (x, y) }}" name="{{ (x, y) }}" value={{num}}
+                                {% if [x,y] in pren %}
+                                <input type="text" maxlength="1" id="{{ (y, x) }}" name="{{ (x, y) }}" value={{num}}
                                     oninput="this.value=this.value.replace(/[^0-9]/g,'');" style="color:green">
                                 {% else %}
-                                <input type="text" maxlength="1" id="{{ (x, y) }}" name="{{ (x, y) }}" value={{num}}
+                                <input type="text" maxlength="1" id="{{ (y, x) }}" name="{{ (x, y) }}" value={{num}}
                                     oninput="this.value=this.value.replace(/[^0-9]/g,'');">
                                 {% endif %}
                                 {% endfor %}<br>
@@ -44,9 +44,13 @@
                                 {% if not y%3 %} <br> {% endif %}
                                 {% for num in line %} {% set x = loop.index - 1 %}
                                 {% if not x%3 %} &nbsp;&nbsp; {% endif %}
-
-                                <input type="text" maxlength="1" id="{{ (x, y) }}" name="{{ (x, y) }}" value={{num}}
+                                {% if [x,y] in pren %}
+                                <input type="text" maxlength="1" id="{{ (y, x) }}" name="{{ (x, y) }}" value={{num}}
+                                    oninput="this.value=this.value.replace(/[^0-9]/g,'');" style="color:green">
+                                {% else %}
+                                <input type="text" maxlength="1" id="{{ (y, x) }}" name="{{ (x, y) }}" value={{num}}
                                     oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+                                {% endif %}
                                 {% endfor %}<br>
                                 {% endfor %}
 
@@ -59,10 +63,10 @@
                                 {% if not x%3 %} &nbsp;&nbsp; {% endif %}
                                 {% if num != "" %}
 
-                                <input type="text" maxlength="1" id="{{ (x, y) }}" name="{{ (x, y) }}" value={{num}}
+                                <input type="text" maxlength="1" id="{{ (y, x) }}" name="{{ (x, y) }}" value={{num}}
                                     oninput="this.value=this.value.replace(/[^0-9]/g,'');">
                                 {% else %}
-                                <input type="text" maxlength="1" id="{{ (x, y) }}" name="{{ (x, y) }}"
+                                <input type="text" maxlength="1" id="{{ (y, x) }}" name="{{ (x, y) }}"
                                     oninput="this.value=this.value.replace(/[^0-9]/g,'');0">
 
                                 {% endif %}
@@ -78,10 +82,10 @@
                                 {% if not x%3 %} &nbsp;&nbsp; {% endif %}
                                 {% if num != "" %}
 
-                                <input type="text" maxlength="1" id="{{ (x, y) }}" name="{{ (x, y) }}" value={{num}}
+                                <input type="text" maxlength="1" id="{{ (y, x) }}" name="{{ (x, y) }}" value={{num}}
                                     oninput="this.value=this.value.replace(/[^0-9]/g,'');">
                                 {% else %}
-                                <input type="text" maxlength="1" id="{{ (x, y) }}" name="{{ (x, y) }}"
+                                <input type="text" maxlength="1" id="{{ (y, x) }}" name="{{ (x, y) }}"
                                     oninput="this.value=this.value.replace(/[^0-9]/g,'');0">
                                 {% endif %}
 
@@ -98,18 +102,18 @@
                                 {% if num != "" %}
 
                                 {% if (y,x) in sud %}
-                                <input type="text" maxlength="1" id="{{ (x, y) }}" name="{{ (x, y) }}" value='{{num}}'
+                                <input type="text" maxlength="1" id="{{ (y, x) }}" name="{{ (x, y) }}" value='{{num}}'
                                     oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                                     style='background-color: red;'>
 
                                 {% else %}
-                                <input type="text" maxlength="1" id="{{ (x, y) }}" name="{{ (x, y) }}" value={{num}}
+                                <input type="text" maxlength="1" id="{{ (y, x) }}" name="{{ (x, y) }}" value={{num}}
                                     oninput="this.value=this.value.replace(/[^0-9]/g,'');"
                                     style='background-color: white;'>
                                 {% endif %}
 
                                 {% else %}
-                                <input type="text" maxlength="1" id="{{ (x, y) }}" name="{{ (x, y) }}" value=''
+                                <input type="text" maxlength="1" id="{{ (y, x) }}" name="{{ (x, y) }}" value=''
                                     oninput="this.value=this.value.replace(/[^0-9]/g,'');0">
                                 {% endif %}
 
@@ -121,9 +125,12 @@
                             <br>
                             <div class=" col-md-7">
                                 <button type="send" class="btn btn-default btn-lg">Resolve</button>
-                                <button type="button" class="btn btn-default btn-lg">Clear Soluction</button>
-                                <button type="button" class="btn btn-default btn-lg" onclick="ClearFields();">Clear
-                                    All</button>
+                                <button type="button" id="clear_sol" class="btn btn-default btn-lg" lista='{{ pren }}'
+                                    onclick="Clear_solution()">Clear
+                                    Soluction</button>
+                                <button type="button" class="btn btn-default btn-lg" disabled>
+                                    <a href=" /sudoku_solver.html">Clear All</a>
+                                </button>
                             </div>
 
 
@@ -138,5 +145,5 @@
 </div>
 {% endblock %}
 {% block scripts %}
-<script type="text/javascript" src="./static/clear.js"></script>
+<script type="text/javascript" src="./static/clear_script.js"></script>
 {% endblock %}
