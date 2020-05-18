@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, redirect
-from minefield import Tabuleiro, show
-from sudoku import *
+from projects.minefield import Tabuleiro, show
+from projects.sudoku import solve_sudoku
+from projects.checkmypass import check_pass
+from projects.email_sender import send_email
+from random import choice
 import csv
 import pdb
 app = Flask(__name__)
@@ -86,12 +89,33 @@ def write_to_csv(data):
         csv_writer.writerow([email, subject, message])
 
 
+@app.route('/passoword-checker', methods=['POST', 'GET'])
+def check_password():
+    if request.method == 'POST':
+        data = request.form.to_dict()
+        count = check_pass(data['pass'])
+        if count:
+            text = f'This password was found {count} times... you should \
+                problably change it'
+        else:
+            text = f'This password was NOT found. Carry on'
+
+        return render_template('password-checker.html', text=text)
+    else:
+        return render_template('password-checker.html')
+
+
 @app.route('/submit_form', methods=['POST', 'GET'])
 def subm():
     if request.method == 'POST':
         data = request.form.to_dict()
         write_to_csv(data)
-        return redirect('/thanks.html')
+        send_email(data['email'], data['subject'], data['message'])
+        thankss = ["thanks for the email, I'll get in contact soon",
+                   "Hope that's not span... Just kidding, I'll get \
+in contact soon", "You're the best, I promise that I'll get in contact soon"]
+        msg = choice(thankss)
+        return render_template('/contact.html', msg=msg)
     else:
         return 'Something gone wrong'
 

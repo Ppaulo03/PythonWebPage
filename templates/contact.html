@@ -1,4 +1,8 @@
 {% extends "layout.html" %}
+{% block title %}
+<title>Contact</title>
+{% endblock %}
+
 {% block body %}
 
 <div class="section-container">
@@ -24,7 +28,11 @@
                     <textarea name="message" class="form-control" rows="5" placeholder="Enter your message"
                       required></textarea>
                   </div>
-                  <button type="submit" class="btn btn-default btn-lg">Send</button>
+                  <button type="submit" onclick="sent_mail()" class="btn btn-default btn-lg">Send</button>
+                  <br>
+                  <font size=3>
+                    {{ msg }}
+                  </font>
                 </div>
                 <div class="col-md-5 address-container">
                   <ul class="list-unstyled">
@@ -32,23 +40,23 @@
                       <span class="fa-icon">
                         <i class="fa fa-phone" aria-hidden="true"></i>
                       </span>
-                      + 33 9 07 45 12 65
+                      (62) *****-8542
                     </li>
                     <li>
                       <span class="fa-icon">
                         <i class="fa fa-at" aria-hidden="true"></i>
                       </span>
-                      e-mail@mail.io
+                      dummyb28@gmail.com
                     </li>
                     <li>
                       <span class="fa-icon">
                         <i class="fa fa fa-map-marker" aria-hidden="true"></i>
                       </span>
-                      42 rue Moulbert 75016 Paris
+                      Goiânia, GO - Brazil
                     </li>
                   </ul>
-                  <h3>Follow me on social networks</h3>
-                  <a href="http://www.facebook.com" title="" class="fa-icon">
+                  <h3>Follow me on social networks</h3> Coming Soon... I promise to create them someday
+                  <!-- <a href="http://www.facebook.com" title="" class="fa-icon">
                     <i class="fa fa-facebook"></i>
                   </a>
                   <a href="http://www.twitter.com" title="" class="fa-icon">
@@ -56,7 +64,7 @@
                   </a>
                   <a href="http://www.linkedin.com" title="" class="fa-icon">
                     <i class="fa fa-linkedin"></i>
-                  </a>
+                  </a> -->
 
                 </div>
               </div>
@@ -70,16 +78,4 @@
   </div>
 </div>
 
-
-<footer class="footer-container text-center">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <p>© UNTITLED | Website created with <a href="http://www.mashup-template.com/"
-            title="Create website with free html template">Mashup Template</a>/<a href="https://www.unsplash.com/"
-            title="Beautiful Free Images">Unsplash</a></p>
-      </div>
-    </div>
-  </div>
-</footer>
 {% endblock %}
