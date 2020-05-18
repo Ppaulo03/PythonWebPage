@@ -20,16 +20,21 @@ Dummy_123c
 
 
 def send_email(name, subject, message):
-    email = EmailMessage()
-    email['from'] = name
-    email['to'] = 'dummyb28@gmail.com'
-    email['subject'] = subject
-    email.set_content(html.substitute(
-        {'message': message, 'name': name}), 'html')
+    try:
 
-    with smtplib.SMTP(host='smtp.gmail.com', port=587) as smtp:
-        smtp.ehlo()
-        smtp.starttls()
-        smtp.login('dummyb28@gmail.com', 'Dummy_123')
-        smtp.send_message(email)
-        print('ALl good Boss!')
+        email = EmailMessage()
+        email['from'] = name
+        email['to'] = 'dummyb28@gmail.com'
+        email['subject'] = subject
+        email.set_content(html.substitute(
+            {'message': message, 'name': name}), 'html')
+
+        with smtplib.SMTP(host='smtp.gmail.com', port=587) as smtp:
+            smtp.ehlo()
+            smtp.starttls()
+            smtp.login('dummyb28@gmail.com', 'Dummy_123')
+            smtp.send_message(email)
+            print('ALl good Boss!')
+
+    except Exception:
+        pass

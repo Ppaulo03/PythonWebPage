@@ -66,11 +66,6 @@ def play_mine_fild():
                                    lose=False, win=False, mark=False)
 
 
-@app.route('/<string:page_name>')
-def urls(page_name=None):
-    return render_template(page_name)
-
-
 def write_to_file(data):
     with open('database.txt', mode='a') as database:
         email = data['email']
@@ -89,6 +84,21 @@ def write_to_csv(data):
         csv_writer.writerow([email, subject, message])
 
 
+@app.route('/submit_form', methods=['POST', 'GET'])
+def subm():
+    if request.method == 'POST':
+        data = request.form.to_dict()
+        write_to_csv(data)
+        send_email(data['email'], data['subject'], data['message'])
+        thankss = ["thanks for the email, I'll get in contact soon",
+                   "Hope that's not span... Just kidding, I'll get \
+in contact soon", "You're the best, I promise that I'll get in contact soon"]
+        msg = choice(thankss)
+        return render_template('/contact.html', msg=msg)
+    else:
+        return 'Something gone wrong'
+
+
 @app.route('/passoword-checker', methods=['POST', 'GET'])
 def check_password():
     if request.method == 'POST':
@@ -103,21 +113,6 @@ def check_password():
         return render_template('password-checker.html', text=text)
     else:
         return render_template('password-checker.html')
-
-
-@app.route('/submit_form', methods=['POST', 'GET'])
-def subm():
-    if request.method == 'POST':
-        data = request.form.to_dict()
-        write_to_csv(data)
-        send_email(data['email'], data['subject'], data['message'])
-        thankss = ["thanks for the email, I'll get in contact soon",
-                   "Hope that's not span... Just kidding, I'll get \
-in contact soon", "You're the best, I promise that I'll get in contact soon"]
-        msg = choice(thankss)
-        return render_template('/contact.html', msg=msg)
-    else:
-        return 'Something gone wrong'
 
 
 @app.route('/solve_sudoku', methods=['POST', 'GET'])
@@ -141,3 +136,8 @@ def sudoku_solver():
                                pren=prench)
     else:
         return 'Something gone wrong'
+
+
+@app.route('/<string:page_name>')
+def urls(page_name=None):
+    return render_template(page_name)
