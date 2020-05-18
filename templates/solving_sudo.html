@@ -2,6 +2,37 @@
 {% block title %}
 <title>Sudoku Solver</title>
 {% endblock %}
+
+{% block headScript %}
+<script>
+
+    function clear_solution() {
+        var lista = document.getElementById("clear_sol").getAttribute("lista");
+        if (lista.length > 2) {
+            var lista = lista.slice(1, -1)
+            var lista = lista.match(/.{1,8}/g)
+            var marked = new Array()
+            lista.forEach(cord => {
+                cord = cord.slice(1, 5)
+                cord = cord.split(", ")
+                var nome = "(" + cord[1] + ", " + cord[0] + ")";
+                marked.push(nome)
+            });
+            for (var x = 0; x < 9; x++) {
+                for (var y = 0; y < 9; y++) {
+                    var nome = "(" + x + ", " + y + ")";
+                    if (marked.includes(nome) == false) {
+                        document.getElementById(nome).value = ""
+                    }
+                }
+            }
+
+        }
+    }
+
+</script>
+{% endblock %}
+
 {% block body %}
 <div class="section-container">
     <div class="container">
@@ -126,7 +157,7 @@
                             <div class=" col-md-7">
                                 <button type="send" class="btn btn-default btn-lg">Resolve</button>
                                 <button type="button" id="clear_sol" class="btn btn-default btn-lg" lista='{{ pren }}'
-                                    onclick="Clear_solution()">Clear
+                                    onclick="clear_solution()">Clear
                                     Soluction</button>
                                 <button type="button" class="btn btn-default btn-lg" disabled>
                                     <a href=" /sudoku_solver.html">Clear All</a>
@@ -143,7 +174,4 @@
         </div>
     </div>
 </div>
-{% endblock %}
-{% block scripts %}
-<script type="text/javascript" src="./static/clear_script.js"></script>
 {% endblock %}
