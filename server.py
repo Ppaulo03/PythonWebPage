@@ -45,7 +45,8 @@ def play_mine_fild():
                 vic, loss = jogo.reveal(int(num[0]), int(num[1]))
                 marking = False
             jogo.register_game(txt=f'database/{num[2]}')
-            return render_template('minefild.html', url=num[2], table=jogo, lose=loss, win=vic, mark=marking)
+            return render_template('minefild.html', url=num[2], table=jogo,
+                                   lose=loss, win=vic, mark=marking)
 
         else:
             global minefield_cont
@@ -58,7 +59,8 @@ def play_mine_fild():
             n_bomb = int((16*tamanho*18.75)/100)
             jogo = Tabuleiro(tamanho, 16, n_bomb)
             jogo.register_game(f'database/{game_url}')
-            return render_template('minefild.html', url=game_url, table=jogo, lose=False, win=False, mark=False)
+            return render_template('minefild.html', url=game_url, table=jogo,
+                                   lose=False, win=False, mark=False)
 
 
 @app.route('/<string:page_name>')
@@ -111,6 +113,7 @@ def sudoku_solver():
 
         res, sol = solve_sudoku(matz)
         print(prench)
-        return render_template('solving_sudo.html', res=res, sud=sol, org=matz, pren=prench)
+        return render_template('solving_sudo.html', res=res, sud=sol, org=matz,
+                               pren=prench)
     else:
         return 'Something gone wrong'
