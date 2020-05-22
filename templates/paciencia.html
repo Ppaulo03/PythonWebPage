@@ -1,0 +1,140 @@
+{% extends "layout.html" %}
+
+{% block title %}
+<title>PACIÊNCIA</title>
+{% endblock %}
+
+{% block ongoing %}onload='append_cards()'{% endblock %}
+
+{% block body %}
+
+<div class="section-container">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-12 ">
+                <div class="card-container">
+                    <div class="text-center">
+                        <br><br>
+                        <h1 class="h2"> Paciência </h1>
+                    </div>
+                </div>
+            </div>
+            <div style="overflow: auto; min-width: 300px;">
+
+                <div style="width: 10%; display: inline-block; vertical-align: top; margin-right: 5%;">
+
+                    <div style="width: 90%;">
+
+                        <div style="position:relative" id="drawing">
+
+                            {% for x in range(-1,24) %}
+                            {% if loop.first %}
+                            <img class="card-sp" onclick="draw_card()" src="./static/assets/images/Deck/1espadas.png"
+                                draggable="false" droppable="false"
+                                style="width: 75%; position:absolute;left:1rem; top:{{x/10}}rem; visibility: visible">
+                            {% else %}
+
+                            <div class="fileira"
+                                style="position: absolute;left:1rem; top:{{x/10}}rem; visibility: visible"
+                                id="draw{{x+28}}" draggable="false" ondragstart="drag(event)" ondrop="drop(event)"
+                                ondragover="allowDrop(event)" onclick="draw_card()">
+
+                                <img class="card-sp" id="baralho" name="{{ deck[x+28] }}"
+                                    src="./static/assets/images/Deck/verso.png" draggable="false" droppable="false"
+                                    ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)"
+                                    style="width: 75%;">
+
+                                <div class="subfileira" id="row{{ deck[x+28] }}" draggable="false" droppable="false"
+                                    ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+                            </div>
+
+                            {% endif %}
+                            {% endfor %}
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div style="width: 65%; display: inline-block; vertical-align: top;">
+
+                    {% for fundo in range(7) %} {% set ext = loop.index0 %}
+
+                    <div class="base" id="fundo{{fundo}}" ondrop="drop(event)" ondragover="allowDrop(event)">
+
+                        {% for card in range( 1, ( 2 + fundo ) ) %} {% set inter = loop.index0 %}
+
+                        <div class="fileira" id="fund{{ fundo,card }}" draggable="true" ondragstart="drag(event)"
+                            ondrop="drop(event)" droppable="false" ondragover="allowDrop(event)">
+
+                            {% set soma = ( (ext + 1) * (ext / 2) ) | int %}
+                            {% set carta = (soma + inter) %}
+
+                            {% if loop.last %}
+
+                            <img class="card-sp" id="baralho" name="{{ deck[carta] }}" data-hid="false"
+                                src="./static/assets/images/Deck/{{deck[carta][1]}}{{deck[carta][0]}}.png"
+                                draggable="false" droppable="false" ondragstart="drag(event)" ondrop="drop(event)"
+                                ondragover="allowDrop(event)">
+
+                            {% else %}
+
+                            <img class="card-sp" id="baralho" name="{{ deck[carta] }}" data-hid="true"
+                                src="./static/assets/images/Deck/verso.png" draggable="false" droppable="false"
+                                ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+
+                            {% endif %}
+
+                            <div class="subfileira" id="row{{ fundo,card }}" draggable="true" ondragstart="drag(event)"
+                                ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+                <div style="width: 10%; display: inline-block; vertical-align: top; margin-right: 5%;">
+                    <div style="width: 50%;">
+                        <div style="position:relative" id="Basing">
+
+                            {% for naipe in ["copas","espadas","ouros","paus"] %}
+                            <div style="padding-bottom: 10px;">
+                                <div class="fileira" id="base{{naipe}}" draggable="false" ondragstart="drag(event)"
+                                    ondrop="drop(event)" droppable="false">
+
+                                    <img class="card-sp" id="base" name="{{ naipe,0 }}"
+                                        src="./static/assets/images/Deck/13{{naipe}}.png" draggable="false"
+                                        droppable="true" ondragstart="drag(event)" ondrop="drop(event)"
+                                        ondragover="allowDrop(event)">
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <button style="background: green;" onclick="document.location.reload(true);">
+                <h2>New Game</h2>
+            </button>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script src="./static/DnD/DragDropTouch.js"></script>
+<script type="text/javascript" src="./static/spider.js"></script>
+{% endblock %}

@@ -5958,4 +5958,38 @@ textarea {
     margin: 0 auto;
 }
 
+.base {
+    width: 11%;
+    display: inline-block;
+    vertical-align: top;
+    height: 10rem;
+    border: 1px solid #aaaaaa;
+    position: relative;
+}
+
+.fileira {
+    position: relative;
+    width: 100%;
+}
+
+.subfileira {
+    width: 100%;
+    height: 11rem;
+    position: absolute;
+    top: 25%;
+    background:none;
+}
+
+.card-sp{
+    width: 100%;
+    position: relative
+}
+
+img{
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
 /*# sourceMappingURL=main.70a66962.map*/

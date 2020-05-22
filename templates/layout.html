@@ -30,7 +30,10 @@
     {% endblock %}
 </head>
 
-<body class="minimal">
+
+<body class="minimal" {% block ongoing %} {% endblock %}>
+
+
     <div id="site-border-left"></div>
     <div id="site-border-right"></div>
     <div id="site-border-top"></div>

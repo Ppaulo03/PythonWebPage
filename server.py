@@ -3,7 +3,7 @@ from projects.minefield import Tabuleiro, show
 from projects.sudoku import solve_sudoku
 from projects.checkmypass import check_pass
 from projects.email_sender import send_email
-from random import choice
+from random import choice, shuffle
 import csv
 import pdb
 app = Flask(__name__)
@@ -138,6 +138,19 @@ def sudoku_solver():
         return 'Something gone wrong'
 
 
+@app.route('/paciencia')
+def spider(page_name=None):
+    naipes = ['copas', 'espadas', 'ouros', 'paus']
+    deck = [(x, num) for x in naipes for num in range(1, 14)]
+    shuffle(deck)
+    return render_template('paciencia.html', deck=deck)
+
+
 @app.route('/<string:page_name>')
 def urls(page_name=None):
-    return render_template(page_name)
+    if ".html" in page_name:
+        page_name = page_name.replace(".html", "")
+        return redirect(page_name)
+    else:
+        page_name = page_name + ".html"
+        return render_template(page_name)
