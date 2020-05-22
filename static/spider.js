@@ -45,9 +45,10 @@ function draw_card() {
         while (draw_cont > 0) {
             draw_cont--;
             var card = cards_in_mont[draw_cont];
-            card.style.top = (cards_in_mont.length - draw_cont) + "px";
+            var mont = document.querySelector("[id='drawing']");
+            mont.appendChild(card);
             card.style.visibility = "visible";
-            card.setAttribute("onclick", "draw_card()")
+            card.setAttribute("onclick", "draw_card()");
             card.children[0].setAttribute("src", "./static/assets/images/Deck/verso.png");
         }
 
@@ -58,15 +59,18 @@ function draw_card() {
 
     else {
         if (actual != null) {
-            actual.style.visibility = 'hidden'
+            actual.style.visibility = 'hidden';
         }
 
-        last_card = actual
-        var card = cards_in_mont[draw_cont]
-        card.style.top = "15rem";
-        card.setAttribute("onclick", "")
-        card.setAttribute("draggable", "true")
+        last_card = actual;
+        var card = cards_in_mont[draw_cont];
 
+        var compr = document.querySelector("[id='comprada']");
+
+        compr.appendChild(card);
+
+        card.setAttribute("onclick", "");
+        card.setAttribute("draggable", "true");
 
         var naming = getName(card.children[0]);
         var url = "./static/assets/images/Deck/" + naming[1] + naming[0] + ".png";
@@ -74,7 +78,7 @@ function draw_card() {
 
         card.children[1].setAttribute("draggable", "true");
 
-        actual = card
+        actual = card;
         draw_cont++;
     }
 
@@ -89,14 +93,14 @@ function allowDrop(ev) {
 }
 
 function drag(ev) {
-
     if (ev.target.getAttribute("draggable") == "false") {
         ev.dataTransfer.setData("text", null);
     }
 
     else if (ev.target.children.length == 0) {
-        ev.dataTransfer.setData("text", ev.target.parentElement.id);
-
+        var parent = ev.target.parentElement;
+        ev.dataTransfer.setData("text", parent.id);
+        ev.dataTransfer.setDragImage(parent.children[0], 0, 0);
     }
 
     else if (ev.target.children[0].getAttribute("data-hid") == "true") {
@@ -189,9 +193,7 @@ function drop(ev) {
             var string_card = card2.getAttribute("name");
             for (var num = 0; num < win.length; num++) {
                 if (win[num] == string_card) {
-                    console.log('herr');
                     win.splice(num, 1);
-                    console.log(num);
                     break;
                 }
             }
