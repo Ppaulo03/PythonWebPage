@@ -26,14 +26,19 @@
     </div>
 </div>
 
+
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block scripts %}
 <script>
     document.addEventListener("DOMContentLoaded", function (event) {
         type();
         movingBackgroundImage();
     });
 </script>
-
-{% endblock %}
-
-{% block footer %}
+<script type="text/javascript" src="./static/script.js"></script>
 {% endblock %}

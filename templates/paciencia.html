@@ -4,6 +4,15 @@
 <title>Paciência</title>
 {% endblock %}
 
+{% block meta %}
+<meta name="KEYWORDS" content="GAME, PACIENCIA, CARDS, JAVASCRIPT" />
+<meta name="description" content="Paciencia game developed with Python">
+<meta property="og:title" content="Paciencia" />
+<meta property="og:url" content="http://peter03.pythonanywhere.com/paciencia" />
+<meta property="og:description" content="A Paciencia game made with Python">
+<meta property="og:image" content="./static/assets/images/images.png">
+{% endblock %}
+
 {% block onbody %}onload="append_cards()"" style="background:#008000"{% endblock %}
 
 {% block body %}
@@ -136,6 +145,7 @@
 </div>
 
 {% endblock %}
+
 {% block scripts %}
 <script src="./static/DnD/DragDropTouch.js"></script>
 <script type="text/javascript" src="./static/spider.js"></script>

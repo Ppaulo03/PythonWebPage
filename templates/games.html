@@ -2,63 +2,98 @@
 {% block title %}
 <title>Games</title>
 {% endblock %}
+
+{% block meta %}
+<meta name="KEYWORDS" content="PYTHON, JAVASCRIPT, GAMES, FREELANCER" />
+<meta name="description" content="Games developed with Python and sometimes with JavaScript">
+<meta property="og:title" content="Games" />
+<meta property="og:url" content="http://peter03.pythonanywhere.com/games" />
+<meta property="og:description" content="Some projects developed with Python and JavaScript">
+<meta property="og:image" content="./static/assets/images/images.png">
+{% endblock %}
+
+
 {% block body %}
+
+
 <div class="section-container">
-    <div class="container">
-        <div class="row">
+	<div class="container">
+		<div class="row">
 
-            <div class="col-sm-8 col-sm-offset-2 section-container-spacer">
-                <div class="text-center">
-                    <h1 class="h2">02 : Games</h1>
-                    <p>
-                    <h3>Mini-games developed using Python and JavaScript</h3>
-                    </p>
-                </div>
-            </div>
+			<div class="col-sm-8 col-sm-offset-2 section-container-spacer">
+				<div class="text-center">
+					<h1 class="h2">02 : Games</h1>
+					<p>
+					<h3>Mini-games developed using Python and JavaScript</h3>
+					</p>
+				</div>
+			</div>
 
-            <div class="col-md-12">
+			<div class="col-md-12">
 
-                <div id="myCarousel" class="carousel slide projects-carousel">
-                    <!-- Carousel items -->
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <div class="row">
-                                <div class="col-sm-4">
+				<div id="myCarousel" class="carousel slide projects-carousel">
+					<!-- Carousel items -->
+					<div class="carousel-inner">
 
-                                    <a href="./mineField" title="" class="black-image-project-hover">
-                                        <img src="./static/assets/images/campominado.jpg" alt="" class="img-responsive">
-                                    </a>
-                                    <div class="card-container card-container-lg">
-                                        <h3>MineField</h3>
-                                        <p>Play a MineField game, developed using python</p>
-                                        <a href="./mineField" title="" class="btn btn-default">Play</a>
-                                    </div>
+						<div class="item active">
+							<div class="row">
+
+								<div class="col-sm-4">
+									<a href="./mineField" title="" class="black-image-project-hover">
+										<img src="./static/assets/images/campominado.jpg" alt="" class="img-responsive">
+									</a>
+									<div class="card-container card-container-lg">
+										<h3>MineField</h3>
+										<p>Play a MineField game, developed using python</p>
+										<a href="./mineField" title="" class="btn btn-default">Play</a>
+									</div>
+								</div>
+
+								<div class="col-sm-4">
+									<a href="./paciencia" title="" class="black-image-project-hover">
+										<img src="./static/assets/images/paciencia.jpg" alt="" class="img-responsive">
+									</a>
+									<div class="card-container card-container-lg">
+										<h3>Paciência</h3>
+										<p>Play a Paciência game, developed using JavaScript</p>
+										<a href="./paciencia" title="" class="btn btn-default">Play</a>
+									</div>
+								</div>
 
 
-                                </div>
-                                <div class="col-sm-4">
+							</div>
+							<!--/row-->
+						</div>
+						<!--/item-->
 
-                                    <a href="./paciencia" title="" class="black-image-project-hover">
-                                        <img src="./static/assets/images/paciencia.jpg" alt="" class="img-responsive">
-                                    </a>
-                                    <div class="card-container card-container-lg">
-                                        <h3>Paciência</h3>
-                                        <p>Play a Paciência game, developed using JavaScript</p>
-                                        <a href="./paciencia" title="" class="btn btn-default">Play</a>
-                                    </div>
+						<div class="item ">
+							<div class="row">
+							</div>
+							<!--/row-->
+						</div>
+						<!--/item-->
 
 
-                                </div>
-                            </div>
-                            <!--/row-->
-                        </div>
-                    </div>
-                </div>
-                <!--/myCarousel-->
-            </div>
+					</div>
+					<!--/carousel-inner-->
+					<!-- <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+					<a class="right carousel-control" href="#myCarousel" data-slide="next">›</a> -->
+					<!--/myCarousel-->
+				</div>
 
-        </div>
-    </div>
+			</div>
+
+		</div>
+	</div>
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+<script>
+	document.addEventListener("DOMContentLoaded", function (event) {
+		navActivePage();
+	});
+</script>
+<script type="text/javascript" src="./static/script.js"></script>
 {% endblock %}
