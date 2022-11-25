@@ -11,7 +11,7 @@ email.html').read_text())
 
 except Exception:
     html = Template(Path(
-        '/home/peter03/PythonWebPage/projects/email.html').read_text())
+        'projects\email.html').read_text())
 
 '''
 dummyb28

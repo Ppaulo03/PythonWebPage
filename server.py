@@ -154,3 +154,6 @@ def urls(page_name=None):
     else:
         page_name = page_name + ".html"
         return render_template(page_name)
+
+if __name__ == '__main__':
+    app.run(debug=True)
