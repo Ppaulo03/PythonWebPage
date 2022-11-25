@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+
+{% block title %}
+<title>Pequiman</title>
+{% endblock %}
+
+{% block meta %}
+<meta name="KEYWORDS" content="GAME, PACIENCIA, CARDS, JAVASCRIPT" />
+<meta name="description" content="Paciencia game developed with Python">
+<meta property="og:title" content="Paciencia" />
+<meta property="og:url" content="http://peter03.pythonanywhere.com/paciencia" />
+<meta property="og:description" content="A Paciencia game made with Python">
+<meta property="og:image" content="./static/assets/images/images.png">
+{% endblock %}
+
+{% block headScript  %}
+<style>
+
+  body{
+    margin : 0;
+    background-color: black;
+  }
+  canvas{
+    padding-top: 15px;
+  }
+  button{
+    background-color: blue; /* Green */
+    border: rgb(255, 200, 64) solid;
+    border-radius: 15px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    width: 200px;
+  }
+  #wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+  }
+  #game-status
+  {
+    width: 200px;
+  }
+  #score {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 50px;
+    border: 5px darkblue solid;
+    background: black;
+    margin-top: 20px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+  }
+  #start-button {
+    margin-top: 20px;
+  }
+  .hide {
+    display: none;
+  }
+  .game-status {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    border: 5px darkblue solid;
+    background: black;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5rem;
+  }
+  .canvas-container{
+    position: relative;
+    width: 600px;
+    height: 350px;
+  }
+
+</style>
+{% endblock %}
+
+{% block body %}
+  
+  <div id="wrapper" style="position: absolute; left: 30%; top: 10%;">
+    <div class="canvas-container">
+      <div id="game-status" style="position: absolute; left: 33%; top: 0%;"></div>
+      <canvas width="600px" height="350px"></canvas>
+      <button id="Slow"   class="hide" style="position: absolute; left: 34%; top: 20%;">Slow  </button>
+      <button id="Normal" class="hide" style="position: absolute; left: 34%; top: 40%;">Normal</button>
+      <button id="Medium" class="hide" style="position: absolute; left: 34%; top: 60%;">Medium</button>
+      <button id="Fast"   class="hide" style="position: absolute; left: 34%; top: 80%;">Fast  </button>
+      <button id="Crazy"  class="hide" style="position: absolute; left: 34%; top: 100%;">Crazy!!!</button>
+    </div>
+    <div id="score"></div>
+    <button id="start-button">Start Game</button>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="./static/pacman.js"></script>
+{% endblock %}

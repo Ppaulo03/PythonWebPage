@@ -1,3 +1,6 @@
+var fireworks = document.getElementById("fireworks");
+fireworks.style.display = "none";
+
 var cores = {
     "espadas": "preto",
     "paus": "preto",
@@ -198,7 +201,7 @@ function drop(ev) {
                 }
             }
             if (win.length == 0) {
-                alert("Parabéns, você venceu");
+                fireworks.style.display = "block";
                 win = ["That's all"];
             }
 

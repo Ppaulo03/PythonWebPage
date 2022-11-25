@@ -145,6 +145,10 @@ def spider(page_name=None):
     shuffle(deck)
     return render_template('paciencia.html', deck=deck)
 
+@app.route('/pacman')
+def pacman(page_name=None):
+    return render_template('pacman.html')
+
 
 @app.route('/<string:page_name>')
 def urls(page_name=None):
