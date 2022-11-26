@@ -14,39 +14,21 @@
 
 {% block body %}
 <div class="section-container">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
+    <div >
+        <div >
+            <div>
                 <div class="section-container-spacer text-center">
                     <h1 class="h2">Load Flow Problem Solver</h1>
                 </div>
-                <div class="centralizar">
+                <div >
                     <div class="col-md-10 col-md-offset-1" style="overflow: auto; width: 800px;">
-                        <form action="solve_sudoku" method="POST" class="reveal-content">
+                        <div style="width: 50%;">
+                            <label for="num_barras">Num. Barras (3 - 10)</label>
+                            <input type="number" value="9" id="num_barras" name="num_barras"  min="3" max="10" oninput="create_table_dado_barras()">
+                        </div>
+                        <div id="DadoBarras" class="form-group sudoku">
 
-                            <div class="form-group sudoku">
-                                {% for y in range(9) %}
-
-                                {% if not y%3 %} <br> {% endif %}
-
-                                {% for x in range(9) %}
-                                {% if not x%3 %} &nbsp;&nbsp; {% endif %}
-                                <input type="text" maxlength="1" name="{{ (x, y) }}"
-                                    oninput="this.value=this.value.replace(/[^0-9]/g,'');">
-                                {% endfor %}<br>
-
-                                {% endfor %}
-                            </div>
-
-                            <br>
-                            <div class=" col-md-7">
-                                <button type="send" class="btn btn-default btn-lg">Resolve</button>
-                                <button type="button" class="btn btn-default btn-lg" disabled>
-                                    <a href=" /sudoku_solver.html">Clear All</a>
-                                </button>
-                            </div>
-
-                        </form>
+                        </div>
                     </div>
 
                 </div>
@@ -55,4 +37,8 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="./static/ISEE.js"></script>
 {% endblock %}
