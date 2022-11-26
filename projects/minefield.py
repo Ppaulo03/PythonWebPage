@@ -33,7 +33,7 @@ class Tabuleiro():
             self.reveal = False
             self.marked = False
 
-    def __init__(self, linha=0, coluna=0, num_bombs=0, txt=None):
+    def __init__(self, linha=0, coluna=0, num_bombs=5, txt=None):
         if txt is None:
             self.linha = linha
             self.coluna = coluna

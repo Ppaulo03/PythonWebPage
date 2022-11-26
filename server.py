@@ -33,37 +33,12 @@ def minefield_game():
 
 
 minefield_cont = 0
-@app.route('/mineField-play', methods=['POST', 'GET'])
+@app.route('/mineField-play', methods=['POST'])
 def play_mine_fild():
-    if request.method == 'POST':
-        data = request.form.to_dict()
-        if data['primeiro'] == 'N':
-            num = data['info'].replace("(", '').replace(")", "").split(",")
-            num[2] = num[2].replace("'", "").replace(" ", '')
-            jogo = Tabuleiro(txt=f'database/{num[2]}')
-            if data['tipo'] == 'mark':
-                vic, loss = jogo.mark(int(num[0]), int(num[1]))
-                marking = True
-            else:
-                vic, loss = jogo.reveal(int(num[0]), int(num[1]))
-                marking = False
-            jogo.register_game(txt=f'database/{num[2]}')
-            return render_template('minefild.html', url=num[2], table=jogo,
-                                   lose=loss, win=vic, mark=marking)
-
-        else:
-            global minefield_cont
-            tamanho = int(data['Dificuldade'])
-            game_url = f'minefild{minefield_cont}.txt'
-            minefield_cont += 1
-            if minefield_cont == 100:
-                minefield_cont = 0
-                print(tamanho)
-            n_bomb = int((16*tamanho*18.75)/100)
-            jogo = Tabuleiro(tamanho, 16, n_bomb)
-            jogo.register_game(f'database/{game_url}')
-            return render_template('minefild.html', url=game_url, table=jogo,
-                                   lose=False, win=False, mark=False)
+    data = request.form.to_dict()
+    tamanho = int(data['Dificuldade'])
+    n_bomb = int((16*tamanho*18.75)/100)
+    return render_template('minefild.html', n_bomb=n_bomb, tamanho=tamanho)
 
 
 def write_to_file(data):

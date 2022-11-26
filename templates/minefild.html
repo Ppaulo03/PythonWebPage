@@ -3,8 +3,26 @@
 <title>MineFild</title>
 {% endblock %}
 
+{% block headScript  %}
+<link href="./static/style.css" rel="stylesheet">
+<style>
+    section{
+        width: 100%;
+        position: absolute;
+        
+        z-index: 1;
+    }
+</style>
+{% endblock %}
+
+{% block onbody %}onload="new Tabuleiro({{tamanho}}, 16, {{n_bomb}})""style="background:#008000"{% endblock %}
 
 {% block body %}
+<nav id="fireworks" class="navbar  navbar-fixed-top navbar-inverse">
+<section> 
+<a href="./mineField" title="" style="padding-left: 50%;padding-top: 50%; position: absolute; z-index: 2;">Play again</a>
+</section>
+</nav>
 <div class="section-container">
     <div class=" container">
         <div class="row">
@@ -13,86 +31,28 @@
                     <h1 class="h2">02 : MineFild</h1>
                 </div>
                 <div class="row">
-                    {% set jogo = url %}
-                    <form action="" method="POST" class="reveal-content">
-                        <input type="hidden" name='primeiro' value='N'>
-                        <div class="col-md-10 col-md-offset-1" style="overflow: auto; min-width: 600px;">
-                            <h3>
-                                {% if mark %}
-                                <img src="./static/assets/images/minefild/pá.png" style='width:10%'> <input type="radio"
-                                    name="tipo" value='reveal'>
-                                <img src="./static/assets/images/minefild/flag.png" style='width:10%'> <input
-                                    type="radio" name="tipo" value='mark' checked>
-                                {% else %}
-                                <img src="./static/assets/images/minefild/pá.png" style='width:10%'> <input type="radio"
-                                    name="tipo" value='reveal' checked>
-                                <img src="./static/assets/images/minefild/flag.png" style='width:10%'><input
-                                    type="radio" name="tipo" value='mark'>
-                                {% endif %}
-                                <img src="./static/assets/images/minefild/bomb_without.png" style='width:10%'>
-                                Bombs:{{table.objetive}} Flags:{{table.num_marks}}</h3>
-                            <br>
-                            {% for line in table.tabuleiro %}
-                            {% set cotroler = loop.index %}
-                            {% for cel in line %}
-                            {% set x = (loop.index+cotroler)%2==0 %}
-                            {% if cel.reveal %}
-                            <button class="minabot" disabled>
-                                <div class="row">
-                                    {% if cel.bomba %}
-                                    <img src="./static/assets/images/minefild/bomb{{win}}.png"
-                                        style="width: 100%; height: 100%;" alt="bomba">
-                                    {% else %}
-                                    <img src="./static/assets/images/minefild/num{{cel.proximidade}}{{x}}.png"
-                                        style="width: 100%; height: 100%;" alt="{{cel.proximidade}}">
-                                    {% endif %}
-                                </div>
-                            </button>
-                            {% else %}
-                            {% if not lose and not win %}
-                            <button class=" minabot" type="submit" name='info' value="{{cel.linha, cel.coluna, url}}">
-                                <div class="row">
-                                    {% if cel.marked %}
-                                    <img src="./static/assets/images/minefild/flag{{x}}.png"
-                                        style="width: 100%; height: 100%;" alt="flag">
-                                    {% else %}
-                                    <img src="./static/assets/images/minefild/tile{{x}}.png"
-                                        style="width: 100%; height: 100%;" alt="tile">
-                                    {% endif %}
-                                </div>
-                            </button>
-                            {% else %}
-                            <button class="minabot" style="width: 5%; height: 5%" disabled>
-                                <div class="row">
-                                    {% if cel.marked %}
-                                    <img src="./static/assets/images/minefild/flag{{x}}.png"
-                                        style="width: 100%; height: 100%;" alt="flag">
-                                    {% else %}
-                                    <img src="./static/assets/images/minefild/tile{{x}}.png"
-                                        style="width: 100%; height: 100%;" alt="tile">
-                                    {% endif %}
-                                </div>
-                            </button>
-                            {% endif %}
-                            {% endif %}
-                            {% endfor %}
-                            <br>
-                            {% endfor %}
-                            {% if (win or lose) %}
-                            <br>
-                            <a href="./mineField" title="" class="btn btn-default">Play again</a>
-                            {% if win %}
-                            parabemnnnns
-                            {% endif %}
-                            {% endif %}
-                        </div>
-                    </form>
-
+                  <div id="table" class="col-md-10 col-md-offset-1" style="overflow: auto; min-width: 600px;">
+                  </div>
                 </div>
-
             </div>
-        </div>
-    </div>
+        </div>      
+    </div>   
+    <a href="./mineField" title="" class="btn btn-default" style="padding-left: 5%; position: absolute; z-index: 2;">Play again</a>    
+    
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='jquery.fireworks.js') }}"></script>
+<script type="text/javascript" src="./static/minefield.js"></script>
+<script>
+    $('section').fireworks({ 
+        sound: true, // sound effect
+        opacity: 0.9, 
+        width: '100%', 
+        height: '100%' 
+    });
+</script>
 {% endblock %}
