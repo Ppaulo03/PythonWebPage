@@ -24,7 +24,7 @@ def send_email(name, subject, message):
 
         email = EmailMessage()
         email['from'] = name
-        email['to'] = 'dummyb28@gmail.com'
+        email['to'] = 'ppaulo030601@gmail.com'
         email['subject'] = subject
         email.set_content(html.substitute(
             {'message': message, 'name': name}), 'html')

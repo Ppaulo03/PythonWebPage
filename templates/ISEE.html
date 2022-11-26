@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block title %}
+<title>Sudoku Solver</title>
+{% endblock %}
+
+{% block meta %}
+<meta name="KEYWORDS" content="SUDOKU SOLVER, SUDOKU TIPS, SUDOKU, PYTHON PROJECT" />
+<meta name="description" content="Sudoku solver developed with Python">
+<meta property="og:title" content="Password Checker" />
+<meta property="og:url" content="http://peter03.pythonanywhere.com/sudoku_solver" />
+<meta property="og:description" content="Sudoku solver developed with Python">
+<meta property="og:image" content="./static/assets/images/images.png">
+{% endblock %}
+
+{% block body %}
+<div class="section-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="section-container-spacer text-center">
+                    <h1 class="h2">Load Flow Problem Solver</h1>
+                </div>
+                <div class="centralizar">
+                    <div class="col-md-10 col-md-offset-1" style="overflow: auto; width: 800px;">
+                        <form action="solve_sudoku" method="POST" class="reveal-content">
+
+                            <div class="form-group sudoku">
+                                {% for y in range(9) %}
+
+                                {% if not y%3 %} <br> {% endif %}
+
+                                {% for x in range(9) %}
+                                {% if not x%3 %} &nbsp;&nbsp; {% endif %}
+                                <input type="text" maxlength="1" name="{{ (x, y) }}"
+                                    oninput="this.value=this.value.replace(/[^0-9]/g,'');">
+                                {% endfor %}<br>
+
+                                {% endfor %}
+                            </div>
+
+                            <br>
+                            <div class=" col-md-7">
+                                <button type="send" class="btn btn-default btn-lg">Resolve</button>
+                                <button type="button" class="btn btn-default btn-lg" disabled>
+                                    <a href=" /sudoku_solver.html">Clear All</a>
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

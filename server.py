@@ -26,6 +26,10 @@ def add_header(r):
 def home():
     return render_template('index.html')
 
+@app.route('/plataformer')
+def plataformer():
+    return render_template('/plataformer.html')
+
 
 @app.route('/mineField')
 def minefield_game():
@@ -92,6 +96,29 @@ def check_password():
 
 @app.route('/solve_sudoku', methods=['POST', 'GET'])
 def sudoku_solver():
+    if request.method == 'POST':
+        data = request.form.to_dict()
+        matz = [[None for x in range(9)] for y in range(9)]
+        prench = list()
+        for cord, num in data.items():
+            cord = cord.replace(
+                "(", "").replace(")", "").split(",")
+            cord[0], cord[1] = int(cord[0]), int(cord[1])
+            matz[cord[1]][cord[0]] = num
+
+            if num != "":
+                prench.append(cord)
+
+        res, sol = solve_sudoku(matz)
+        print(prench)
+        return render_template('solving_sudo.html', res=res, sud=sol, org=matz,
+                               pren=prench)
+    else:
+        return 'Something gone wrong'
+    
+
+@app.route('/ISEE_solver', methods=['POST', 'GET'])
+def ISEE_solver():
     if request.method == 'POST':
         data = request.form.to_dict()
         matz = [[None for x in range(9)] for y in range(9)]
