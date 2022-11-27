@@ -3,9 +3,11 @@ from projects.sudoku import solve_sudoku
 from projects.checkmypass import check_pass
 from projects.email_sender import send_email
 from projects.ISEE.PFC import soluciona_PFC_NR, soluciona_PFC_desacoplado, print_results
+from projects.ISEE.txt_functions import configure_text_matriz, print_matriz
 from random import choice, shuffle
+from numpy import rad2deg
 import csv
-import pdb
+
 app = Flask(__name__)
 
 
@@ -117,7 +119,7 @@ def sudoku_solver():
         return 'Something gone wrong'
     
 
-@app.route('/ISEE_solver', methods=['POST', 'GET'])
+@app.route('/ISEE', methods=['POST', 'GET'])
 def ISEE_solver():
     if request.method == 'POST':
         data = request.form.to_dict()
@@ -147,46 +149,40 @@ def ISEE_solver():
             for label in dado_linhas_labels: lt.append(float(data[label + str(i)]) if data[label + str(i)] != '' else None)
             DadosLinhaTransformadores.append(lt)
 
-
-        DadosLinhaTransformadores = [
-            [1, 4, 0.0000, 0.0576, 0.0000],
-            [2, 7, 0.0000, 0.0625, 0.0000],
-            [3, 9, 0.0000, 0.0586, 0.0000],
-            [4, 5, 0.0100, 0.0850, 0.0176],
-            [4, 6, 0.0170, 0.0920, 0.1580],
-            [5, 7, 0.0320, 0.1610, 0.3060],
-            [6, 9, 0.0390, 0.1700, 0.3580],
-            [7, 8, 0.0085, 0.0720, 0.1490],
-            [8, 9, 0.0119, 0.1010, 0.2090] 
-        ]
-
-        DadoBarras = [
-            [1, 'Slack', 0.00, 0.00, None, None, 1.040, 0.00],
-            [2, 'PV'   , 0.00, 0.00, 1.63, None, 1.025, 0.00],
-            [3, 'PV'   , 0.00, 0.00, 0.85, None, 1.025, 0.00],
-            [4, 'PQ'   , 0.00, 0.00, 0.00, 0.00, 1.000, 0.00],
-            [5, 'PQ'   , 1.25, 0.50, 0.00, 0.00, 1.000, 0.00],
-            [6, 'PQ'   , 0.90, 0.30, 0.00, 0.00, 1.000, 0.00],
-            [7, 'PQ'   , 0.00, 0.00, 0.00, 0.00, 1.000, 0.00],
-            [8, 'PQ'   , 1.00, 0.35, 0.00, 0.00, 1.000, 0.00],
-            [9, 'PQ'   , 0.00, 0.00, 0.00, 0.00, 1.000, 0.00]
-        ]
-
-        Sbase = 100
-        Vbase = [16.5, 18, 13.8, 230, 230, 230, 230, 230, 230]
-        tolerancia = 1e-9
-
         try:
-            tensões, fluxos, iterações, tempo = soluciona_PFC_desacoplado(DadosLinhaTransformadores, DadoBarras, tolerancia)
-            if tensões is None: print("Máximo de iterações atingida sem convergir na tolerância estabelecida")
-            else: print_results(tensões, fluxos, iterações, Vbase, Sbase, tempo)
+
+            if(data['metodo'] == 'normal'):
+                tensões, fluxos, iterações, tempo = soluciona_PFC_NR(DadosLinhaTransformadores, DadoBarras, tolerancia)
+            else:
+                tensões, fluxos, iterações, tempo = soluciona_PFC_desacoplado(DadosLinhaTransformadores, DadoBarras, tolerancia)
+           
+            if tensões is None: return render_template('ISEE.html', erro=False, iterações_max=True)
+            else: 
+                tensões_txt = [['Barra', 'V[pu]', 'Fase[rad]', 'V[kv]', 'Fase[graus]']]
+                for barra in tensões: 
+                    n_barra = str(barra[0]); v_pu = f'{barra[1]:.4f}'; theta_rad = f'{barra[2]:.4f}'
+                    v_kv = f'{barra[1]*Vbase[barra[0]-1]:.4f}'; theta_deg = f'{rad2deg(barra[2]):.4f}'
+                    tensões_txt.append([n_barra, v_pu, theta_rad, v_kv, theta_deg])
+
+                fluxos_txt = [['From', 'To', 'P[MW]', 'Q[MVAr]']]
+                perdas_P_total = 0; perdas_Q_total = 0
+                for linha in fluxos:
+                    fr= str(linha[0]); to = str(linha[1]); 
+                    P = f'{linha[2]*Sbase:.4f}'; Q = f'{linha[3]*Sbase:.4f}'
+                    fluxos_txt.append([fr, to, P, Q])
+
+                    perdas_P_total += linha[2]; perdas_Q_total += linha[3]
+
+                perdas_P_total *= Sbase; perdas_Q_total*= Sbase
+
+                return render_template('ISEE_solved.html', tensões_txt=configure_text_matriz(tensões_txt), fluxos_txt=configure_text_matriz(fluxos_txt),
+                                perdas_P_total=perdas_P_total, perdas_Q_total=perdas_Q_total, iterações=iterações, tempo=tempo)
         except Exception as e:
             print(e)
-
-        return redirect('ISEE')
+            return render_template('ISEE.html', erro=True, iterações_max = False)
 
     else:
-        return 'Something gone wrong'
+        return render_template('ISEE.html', erro=False, iterações_max = False)
 
 
 @app.route('/paciencia')

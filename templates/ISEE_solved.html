@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+{% block title %}
+<title>Load Flow Problem Solver</title>
+{% endblock %}
+
+{% block meta %}
+<meta name="KEYWORDS" content="SUDOKU SOLVER, SUDOKU TIPS, SUDOKU, PYTHON PROJECT" />
+<meta name="description" content="Sudoku solver developed with Python">
+<meta property="og:title" content="Password Checker" />
+<meta property="og:url" content="http://peter03.pythonanywhere.com/sudoku_solver" />
+<meta property="og:description" content="Sudoku solver developed with Python">
+<meta property="og:image" content="./static/assets/images/images.png">
+{% endblock %}
+
+{% block headScript  %}
+<style>
+    table, th, td {
+  border:1px solid black;
+  text-align: center;
+}
+</style>
+{% endblock %}
+
+{% block body %}
+
+<div class="section-container">
+    <div >
+        <div >
+            <div>
+                <div class="section-container-spacer text-center">
+                    <h1 class="h2">Load Flow Problem Solver</h1>
+                </div>
+                <div >
+                    <div class="col-sm-4" style="padding-left: 20%;">
+                        <table id="DadosTensões">
+                            {% for l in fluxos_txt %}
+                                <tr>
+                                    {% for c in l %}
+                                        <th>
+                                            {{ c }}
+                                        </th>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <div class="col-sm-4" style="width: 20%;">
+                        <table id="DadosTensões">
+                            {% for l in tensões_txt %}
+                                <tr>
+                                    {% for c in l %}
+                                        <th>
+                                            {{ c }}
+                                        </th>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <div class="col-sm-4" style="width: 50%;">
+                        <p style="font-size:15px">
+                        Perdas de potência ativa totais [MW]: {{perdas_P_total}} <br>
+                        Perdas de potência reativa totais [MVAr]: {{perdas_Q_total}} <br>
+                        Número de iterações realizadas: {{iterações}} <br>
+                        Elapsed time: {{tempo}} s
+                        </p>
+                        <button type="button" class="btn btn-default btn-lg" disabled>
+                            <a href=" /ISEE">BACK</a>
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -290,7 +290,7 @@ def print_results(tensões, fluxos, iterações, Vbase, Sbase, tempo):
     print_matriz(configure_text_matriz(fluxos_txt)); print()
     print(f'Perdas de potência ativa totais [MW]: {perdas_P_total:.6f}')
     print(f'Perdas de potência reativa totais [MVAr]: {perdas_Q_total:.6f}')
-    print(f'Número de iterações realizadas: {iterações}');
+    print(f'Número de iterações realizadas: {iterações}')
     print(f'Elapsed time: {tempo} seconds'); print()
 
 

@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block title %}
-<title>Sudoku Solver</title>
+<title>Load Flow Problem Solver</title>
 {% endblock %}
 
 {% block meta %}
@@ -31,7 +31,22 @@
                 </div>
                 <div >
                     <div class="col-md-10 col-md-offset-1" style="overflow: auto; width: 100%;">
-                        <form action="ISEE_solver" method="POST" class="reveal-content">
+                        {% if erro %}
+                        <p style="color: red; font-size: 15px;">
+                            Something went wrong... please double check the entered values
+                        </p>
+                        {% endif %}
+
+                        {% if iterações_max %}
+                        <p style="color: blue; font-size: 15px;">
+                            Maximum iterations reached without converging in the established tolerance
+                        </p>
+                        {% endif %}
+
+                        <form action="ISEE" method="POST" class="reveal-content">
+                            <input type="radio" name="metodo" value='normal' checked> Newton-Rapson
+                            <input type="radio" name="metodo" value='desacoplado' > Newton-Rapson Desacoplado
+
                             <div style="width: 50%;">
                                 <label for="num_barras">Num. Barras (3 - 10)</label>
                                 <input type="number" value="9" id="num_barras" name="num_barras"  min="3" max="10" style = "text-align: center" oninput="create_table_dado_barras()">

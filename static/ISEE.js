@@ -46,6 +46,7 @@ function dado_barras_linha(num_barra)
         let c = document.createElement('input');
         c.name = dado_barra_labels[i+2] + num_barra;
         c.type = "number";
+        c.step="0.00001";
         c.style = "text-align: center"
         cel_content.appendChild(c);
         line.append(cel_content);
@@ -99,7 +100,7 @@ function create_table_Vbase(){
         let cel =  document.createElement('th');
         let t =  document.createElement('label');
         t.innerHTML = i+1;
-        t.step="0.01";
+        t.step="0.00001";
         t.min = 0;
         cel.appendChild(t);
         line.append(cel);
@@ -112,7 +113,7 @@ function create_table_Vbase(){
         let c = document.createElement('input');
         c.name = "Vbase" + i;
         c.type = "number";
-        c.step="0.01"
+        c.step="0.00001";
         c.style = "text-align: center"
         cel_content.appendChild(c);
         line2.append(cel_content);
@@ -130,6 +131,7 @@ function dado_linha_linha(linha)
         let c = document.createElement('input');
         c.name = dado_linhas_labels[i] + linha;
         c.type = "number";
+        c.step="0.00001";
         c.style = "text-align: center"
         cel_content.appendChild(c);
         line.append(cel_content);
