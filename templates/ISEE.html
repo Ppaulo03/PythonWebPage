@@ -12,6 +12,15 @@
 <meta property="og:image" content="./static/assets/images/images.png">
 {% endblock %}
 
+{% block headScript  %}
+<style>
+    table, th, td {
+  border:1px solid black;
+  text-align: center;
+}
+</style>
+{% endblock %}
+
 {% block body %}
 <div class="section-container">
     <div >
@@ -21,14 +30,38 @@
                     <h1 class="h2">Load Flow Problem Solver</h1>
                 </div>
                 <div >
-                    <div class="col-md-10 col-md-offset-1" style="overflow: auto; width: 800px;">
-                        <div style="width: 50%;">
-                            <label for="num_barras">Num. Barras (3 - 10)</label>
-                            <input type="number" value="9" id="num_barras" name="num_barras"  min="3" max="10" oninput="create_table_dado_barras()">
-                        </div>
-                        <div id="DadoBarras" class="form-group sudoku">
+                    <div class="col-md-10 col-md-offset-1" style="overflow: auto; width: 100%;">
+                        <form action="ISEE_solver" method="POST" class="reveal-content">
+                            <div style="width: 50%;">
+                                <label for="num_barras">Num. Barras (3 - 10)</label>
+                                <input type="number" value="9" id="num_barras" name="num_barras"  min="3" max="10" style = "text-align: center" oninput="create_table_dado_barras()">
+                            </div>
+                        
+                            <div style="width: 50%;">
+                                <label for="Sbase">Sbase (MVA)</label>
+                                <input type="number" value="100" id="Sbase" name="Sbase" min = 0 style = "text-align: center">
+                            </div>
+                            <div style="width: 50%;">
+                                <label for="Tolerancia">Tolerância: 10^-:</label>
+                                <input type="number" id="Tolerancia" name="Tolerancia"  min="0" style = "text-align: center">
+                            </div>
+                            <table id="Vbase"></table>
+                            <br>
+                            <table id="DadoBarras"></table>
+                            <br>
+                            <div style="width: 50%;">
+                                <label for="num_linhas">Num. Linhas</label>
+                                <input type="number" value="9" id="num_linhas" name="num_linhas"  min="1" style = "text-align: center" oninput="create_table_dado_linhas()">
+                            </div>
+                            <table id="DadosLinhas"></table>
 
-                        </div>
+                            <div class=" col-md-7">
+                                <button type="send" class="btn btn-default btn-lg">Resolve</button>
+                            </div>
+
+                        </form>
+                        
+
                     </div>
 
                 </div>

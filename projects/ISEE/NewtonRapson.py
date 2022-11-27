@@ -1,6 +1,6 @@
 import numpy as np
 from sympy import  lambdify, symbols, diff
-from txt_functions import print_array, print_matriz
+from projects.ISEE.txt_functions import print_array, print_matriz
 
 def Jacobiana(f_, x_): return [[diff(f, x)for x in x_ ] for f in f_] #Cria a matriz jacobiana 
 

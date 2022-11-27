@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, redirect
-from projects.minefield import Tabuleiro, show
 from projects.sudoku import solve_sudoku
 from projects.checkmypass import check_pass
 from projects.email_sender import send_email
+from projects.ISEE.PFC import soluciona_PFC_NR, soluciona_PFC_desacoplado, print_results
 from random import choice, shuffle
 import csv
 import pdb
@@ -121,21 +121,41 @@ def sudoku_solver():
 def ISEE_solver():
     if request.method == 'POST':
         data = request.form.to_dict()
-        matz = [[None for x in range(9)] for y in range(9)]
-        prench = list()
-        for cord, num in data.items():
-            cord = cord.replace(
-                "(", "").replace(")", "").split(",")
-            cord[0], cord[1] = int(cord[0]), int(cord[1])
-            matz[cord[1]][cord[0]] = num
 
-            if num != "":
-                prench.append(cord)
+        dado_barra_labels = ["Potencia Ativa de Carga (p.u)", "Potencia Reativa de Carga (p.u)", "Potencia ativa gerada(p.u)", 
+                        "Potencia reativa gerada (p.u)", "Modulo da tensao (p.u)", "Angulo da tensao (graus)"]
 
-        res, sol = solve_sudoku(matz)
-        print(prench)
-        return render_template('solving_sudo.html', res=res, sud=sol, org=matz,
-                               pren=prench)
+        dado_linhas_labels = ["Barra Envio", "Barra_recibo", "Resistencia Serie (p.u)", "Reatancia Serie (p.u)", "Suceptancia shunt Y/2 (p.u)"]
+
+        n_barras = int(data['num_barras'] if data['num_barras'] != '' else 0)
+        Sbase = float(data['Sbase'] if data['Sbase'] != '' else 200) 
+        tolerancia = 10 ** -(int(data['Tolerancia'] if data['Tolerancia'] != '' else 9))
+
+        Vbase = []
+        DadoBarras = []
+        for i in range(n_barras): 
+            Vbase.append(float(data["Vbase" + str(i)]) if data["Vbase" + str(i)] != '' else 0)
+            barra = [i+1]
+            barra.append(data["tipo" + str(i+1)])
+            for label in dado_barra_labels:  
+                barra.append(float(data[label + str(i+1)]) if data[label + str(i+1)] != '' else None)
+            DadoBarras.append(barra)
+
+        DadosLinhaTransformadores = []
+        for i in range(int(data['num_linhas'] if data['num_linhas'] != '' else 0)):
+            lt = []
+            for label in dado_linhas_labels: lt.append(float(data[label + str(i)]) if data[label + str(i)] != '' else None)
+            DadosLinhaTransformadores.append(lt)
+
+        try:
+            tensões, fluxos, iterações, tempo = soluciona_PFC_desacoplado(DadosLinhaTransformadores, DadoBarras, tolerancia)
+            if tensões is None: print("Máximo de iterações atingida sem convergir na tolerância estabelecida")
+            else: print_results(tensões, fluxos, iterações, Vbase, Sbase, tempo)
+        except Exception as e:
+            print(e)
+
+        return redirect('ISEE')
+
     else:
         return 'Something gone wrong'
 

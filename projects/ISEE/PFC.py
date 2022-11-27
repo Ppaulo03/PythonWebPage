@@ -1,8 +1,8 @@
 from numpy import rad2deg, concatenate
 from sympy import  Symbol, cos, sin
 from time import time
-from NewtonRapson import newton_rapson, newton_rapson_desacoplado
-from txt_functions import print_matriz, configure_text_matriz
+from projects.ISEE.NewtonRapson import newton_rapson, newton_rapson_desacoplado
+from projects.ISEE.txt_functions import print_matriz, configure_text_matriz
 
 
 def get_ohmk(D, k): #Obtem todas as barras que estão diretamente ligadas a uma barra k, com exceção dela mesma
