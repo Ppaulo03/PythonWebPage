@@ -147,6 +147,35 @@ def ISEE_solver():
             for label in dado_linhas_labels: lt.append(float(data[label + str(i)]) if data[label + str(i)] != '' else None)
             DadosLinhaTransformadores.append(lt)
 
+
+        DadosLinhaTransformadores = [
+            [1, 4, 0.0000, 0.0576, 0.0000],
+            [2, 7, 0.0000, 0.0625, 0.0000],
+            [3, 9, 0.0000, 0.0586, 0.0000],
+            [4, 5, 0.0100, 0.0850, 0.0176],
+            [4, 6, 0.0170, 0.0920, 0.1580],
+            [5, 7, 0.0320, 0.1610, 0.3060],
+            [6, 9, 0.0390, 0.1700, 0.3580],
+            [7, 8, 0.0085, 0.0720, 0.1490],
+            [8, 9, 0.0119, 0.1010, 0.2090] 
+        ]
+
+        DadoBarras = [
+            [1, 'Slack', 0.00, 0.00, None, None, 1.040, 0.00],
+            [2, 'PV'   , 0.00, 0.00, 1.63, None, 1.025, 0.00],
+            [3, 'PV'   , 0.00, 0.00, 0.85, None, 1.025, 0.00],
+            [4, 'PQ'   , 0.00, 0.00, 0.00, 0.00, 1.000, 0.00],
+            [5, 'PQ'   , 1.25, 0.50, 0.00, 0.00, 1.000, 0.00],
+            [6, 'PQ'   , 0.90, 0.30, 0.00, 0.00, 1.000, 0.00],
+            [7, 'PQ'   , 0.00, 0.00, 0.00, 0.00, 1.000, 0.00],
+            [8, 'PQ'   , 1.00, 0.35, 0.00, 0.00, 1.000, 0.00],
+            [9, 'PQ'   , 0.00, 0.00, 0.00, 0.00, 1.000, 0.00]
+        ]
+
+        Sbase = 100
+        Vbase = [16.5, 18, 13.8, 230, 230, 230, 230, 230, 230]
+        tolerancia = 1e-9
+
         try:
             tensões, fluxos, iterações, tempo = soluciona_PFC_desacoplado(DadosLinhaTransformadores, DadoBarras, tolerancia)
             if tensões is None: print("Máximo de iterações atingida sem convergir na tolerância estabelecida")
