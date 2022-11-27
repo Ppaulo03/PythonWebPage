@@ -146,7 +146,9 @@ def ISEE_solver():
         DadosLinhaTransformadores = []
         for i in range(int(data['num_linhas'] if data['num_linhas'] != '' else 0)):
             lt = []
-            for label in dado_linhas_labels: lt.append(float(data[label + str(i)]) if data[label + str(i)] != '' else None)
+            for idx, label in enumerate(dado_linhas_labels): 
+                if idx == 0 or idx == 1: lt.append(int(data[label + str(i)]) if data[label + str(i)] != '' else None)
+                else: lt.append(float(data[label + str(i)]) if data[label + str(i)] != '' else None)
             DadosLinhaTransformadores.append(lt)
 
         try:

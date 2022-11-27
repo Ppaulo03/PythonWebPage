@@ -3,18 +3,32 @@ let DadoLinhas = document.getElementById("DadosLinhas");
 let Vbase = document.getElementById("Vbase");
 
 let NumBarra_element = document.getElementById("num_barras");
+set_local_storage(NumBarra_element);
+if(NumBarra_element.value == null) NumBarra_element.value = 9;
 let n_barras = NumBarra_element.value;
 
 let NumLinhas_element = document.getElementById("num_linhas");
+set_local_storage(NumLinhas_element);
+if(NumLinhas_element.value == null) NumLinhas_element.value = 9;
 let n_linhas = NumLinhas_element.value;
 
-let name_tipos = ["slack", "PQ", "PV"]
+set_local_storage(document.getElementById("Sbase"));
+set_local_storage(document.getElementById("Tolerancia"));
 
+
+let name_tipos = ["slack", "PQ", "PV"];
 
 let dado_barra_labels = ["N_barra", "Tipo", "Potencia Ativa de Carga (p.u)", "Potencia Reativa de Carga (p.u)", "Potencia ativa gerada(p.u)", 
                         "Potencia reativa gerada (p.u)", "Modulo da tensao (p.u)", "Angulo da tensao (graus)"];
 let dado_linhas_labels = ["Barra Envio", "Barra_recibo", "Resistencia Serie (p.u)", "Reatancia Serie (p.u)", "Suceptancia shunt Y/2 (p.u)"];
 
+function set_local_storage(element)
+{
+    element.value = localStorage.getItem(element.name);
+    element.addEventListener('change', function handleChange(event) {
+        localStorage.setItem(element.name, event.target.value);
+        });
+}
 
 function dado_barras_linha(num_barra)
 {
@@ -37,6 +51,8 @@ function dado_barras_linha(num_barra)
         t.innerHTML = e;
         tipo.appendChild(t);
     });
+    set_local_storage(tipo);
+    if (tipo.value == null) tipo.value = "slack";
     cel_tipo.appendChild(tipo);
     line.append(cel_tipo);
     
@@ -48,6 +64,7 @@ function dado_barras_linha(num_barra)
         c.type = "number";
         c.step="0.00001";
         c.style = "text-align: center"
+        set_local_storage(c);
         cel_content.appendChild(c);
         line.append(cel_content);
     }
@@ -100,7 +117,6 @@ function create_table_Vbase(){
         let cel =  document.createElement('th');
         let t =  document.createElement('label');
         t.innerHTML = i+1;
-        t.step="0.00001";
         t.min = 0;
         cel.appendChild(t);
         line.append(cel);
@@ -115,6 +131,7 @@ function create_table_Vbase(){
         c.type = "number";
         c.step="0.00001";
         c.style = "text-align: center"
+        set_local_storage(c);
         cel_content.appendChild(c);
         line2.append(cel_content);
     }
@@ -134,6 +151,7 @@ function dado_linha_linha(linha)
         c.step="0.00001";
         c.style = "text-align: center"
         cel_content.appendChild(c);
+        set_local_storage(c);
         line.append(cel_content);
     }
     DadoLinhas.appendChild(line);
