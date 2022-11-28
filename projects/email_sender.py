@@ -2,16 +2,10 @@ import smtplib
 from email.message import EmailMessage
 from string import Template
 from pathlib import Path
+from get_dir import get_dir
 
-try:
 
-    html = Template(Path(
-        '/home/pedro/Área de Trabalho/Python mini projects/WebServer/projects/\
-email.html').read_text())
-
-except Exception:
-    html = Template(Path(
-        'projects\email.html').read_text())
+html = Template(Path(get_dir('projects\email.html')).read_text())
 
 '''
 dummyb28
