@@ -206,7 +206,11 @@ def urls(page_name=None):
         return redirect(page_name)
     else:
         page_name = page_name + ".html"
-        return render_template(page_name)
+        try:
+            render = render_template(page_name)
+        except:
+            render = render_template("error.html")
+        return render
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
