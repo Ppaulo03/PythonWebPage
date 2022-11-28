@@ -5425,10 +5425,6 @@ body.minimal {
     padding: 0
 }
 
-.hero-full-container {
-    height: 100vh
-}
-
 .hero-full-container h1 {
     font-family: Roboto, Helvetica, Arial, sans-serif;
     font-weight: 900
@@ -5442,7 +5438,8 @@ body.minimal {
 }
 
 .hero-full-container .hero-full-wrapper .text-content {
-    vertical-align: middle;
+    vertical-align: top;
+    padding-top: 10%;
     display: table-cell
 }
 

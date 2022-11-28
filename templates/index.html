@@ -16,43 +16,136 @@
 {% endblock %}
 
 {% block body %}
-<!--
 
-<div class="hero-full-container background-image-container white-text-container"
-    style="background-image: url('./static/assets/images/wolf.jpeg')">
+<div class="hero-full-container white-text-container" style="background-color: black;">
     <div class="container">
-        <div class="row">
+        <div>
             <div class="col-xs-12">
                 <div class="hero-full-wrapper">
                     <div class="text-content">
                         <h1>Hello,<br>
-                            <span id="typed-strings">
-                                <span>I'm Pedro Paulo</span>
-                                <span>Python Developer</span>
-                                <span>Enjoyng a Hobby</span>
+                            <span style="font-size: 45px;">
+                                <span>My name's Pedro Paulo, I'm a developer, student at UFG and member of the robotics group  Pequi Mecânico.</span>
+                                <span>There's some of my projects and games:</span>
                             </span>
-                            <span id="typed"></span>
                         </h1>
+                        <div class="col-sm-4">
+                            <a href="./plataformer" title="" class="black-image-project-hover">
+                                <img src="./static/assets/images/plataformer.jpeg" alt="" class="img-responsive">
+                            </a>
+                        </div>
+                        <br>
+                        <h1 style="font-size: 30px;">
+                            <span> Plataformer</span>
+                        </h1>
+                        <h1 style="font-size: 30px;">
+                            <span>  A 2D plataformer game made with Unity</span>
+                        </h1>
+                        <br><br><br>
+                        <div class="col-sm-4">
+                            <a href="./sudoku_solver.html" title="" class="black-image-project-hover">
+                              <img src="./static/assets/images/sudoku.jpg"  alt="" class="img-responsive">
+                            </a>
+                        </div>
+                        <h1 style="font-size: 30px;">
+                            <span> Sudoku</span>
+                        </h1>
+                        <h1 style="font-size: 30px;">
+                            <span> A program to solve Sudokus</span>
+                        </h1>
+                        <br><br><br>
+                        <div class="col-sm-4">
+                            <a href="./pacman" title="" class="black-image-project-hover">
+                                <img src="./static/assets/images/pequiman.jpg" alt="" class="img-responsive">
+                            </a>
+                        </div>
+                        <h1 style="font-size: 30px;">
+                            <span> PequiMan</span>
+                        </h1>
+                        <h1 style="font-size: 30px;">
+                            <span>  A Pacman game, developed using JavaScript</span>
+                        </h1>
+                        <br><br><br>
+                        <h1>
+                            <span style="font-size: 25px;">
+                                
+                                <a href="./games.html" title="" >
+                                    <span>To see more games click here</span>
+                                </a>
+                                &nbsp
+                                <a href="./projects.html" title="">
+                                    <span>To see more projects click here</span>
+                                </a>
+                                
+                            </span>
+                            <br><br>
+                            Contact Me
+                        </h1>
+                        
+                        <form action="submit_form" method="POST" class="reveal-content">
+                            <div class="row">
+                              <div class="col-md-7">
+                                <div class="form-group">
+                                  <input name="email" type="email" class="form-control" id="email" placeholder="Email" required>
+                                </div>
+                                <div class="form-group">
+                                  <input name="subject" type="text" class="form-control" id="subject" placeholder="Subject" required>
+                                </div>
+                                <div class="form-group">
+                                  <textarea name="message" class="form-control" rows="5" placeholder="Enter your message"
+                                    required></textarea>
+                                </div>
+                                <button type="submit" onclick="sent_mail()" class="btn btn-default btn-lg">Send</button>
+                                <br>
+                                <font size=3>
+                                  {{ msg }}
+                                </font>
+                              </div>
+                              <div class="col-md-5 address-container">
+                                <h1 style="font-size: 15px;">
+                                <ul class="list-unstyled">
+                                  <li>
+                                    <span class="fa-icon">
+                                      <i class="fa fa-phone" aria-hidden="true" style="filter: invert(100%);"></i>
+                                    </span>
+                                   +55(62)98542-9500
+                                  </li>
+                                  <li>
+                                    <span class="fa-icon">
+                                      <i class="fa fa-at" aria-hidden="true"  style="filter: invert(100%);"></i>
+                                    </span>
+                                    ppaulo030601@gmail.com
+                                  </li>
+                                  <li>
+                                    <span class="fa-icon">
+                                      <i class="fa fa fa-map-marker" aria-hidden="true"  style="filter: invert(100%);"></i>
+                                    </span>
+                                    Goiânia, GO - Brazil
+                                  </li>
+                                </ul>
+                                </h1>
+                                <h3>Follow me on social networks</h3>
+                                <a href="https://github.com/Ppaulo03" target="_blank" rel="noopener noreferrer" title="" class="fa-icon">
+                                  <i class="fa fa-github"></i>
+                                </a>
+                                <a href="https://www.instagram.com/ppaulo03/" target="_blank" rel="noopener noreferrer" title="" class="fa-icon">
+                                  <i class="fa fa-instagram"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/pedro-paulo-carvalho-vieira/" target="_blank" rel="noopener noreferrer" title="" class="fa-icon">
+                                  <i class="fa fa-linkedin"></i>
+                                </a>
+              
+                              </div>
+                            </div>
+                          </form>
+
                     </div>
                 </div>
             </div>
         </div>
+       
     </div>
 </div>
 
- -->
 
-{% endblock %}
-
-{% block footer %}
-{% endblock %}
-
-{% block scripts %}
-<script>
-    document.addEventListener("DOMContentLoaded", function (event) {
-        type();
-        movingBackgroundImage();
-    });
-</script>
-<script type="text/javascript" src="./static/script.js"></script>
 {% endblock %}

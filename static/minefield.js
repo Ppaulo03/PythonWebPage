@@ -73,7 +73,7 @@ class Tabuleiro
                 situation = situation.charAt(0).toUpperCase() + situation.slice(1);
                 img.id = "tile("+ lin + "," + n+")";
                 img.src = "./static/assets/images/minefild/tile" + situation  + ".png";
-                img.style="width: 100%; height: 100%;"
+                img.style="width: 150%; height: 150%;"
                 img.alt="tile";
                 btn.appendChild(img);
 
