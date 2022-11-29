@@ -209,11 +209,11 @@ def urls(page_name=None):
         page_name = page_name.replace(".html", "")
         return redirect(page_name)
     else:
-        page_name = page_name + ".html"
+        html_page_name = page_name + ".html"
         try:
-            render = render_template(page_name)
+            render = render_template(html_page_name)
         except:
-            render = render_template("error.html")
+            return redirect('https://pt.wikipedia.org/w/index.php?search=' + page_name)
         return render
 
 if __name__ == '__main__':
