@@ -84,11 +84,11 @@ function play_audio(audio)
     soundEffect.play();
 }
 
-const soundDot = './static/assets/Sounds/munch.wav'
-const soundPill = './static/assets/Sounds/pill.wav'
-const soundStart = './static/assets/Sounds/game_start.wav'
-const soundGameOver = './static/assets/Sounds/death.wav'
-const soundGhost = './static/assets/Sounds/eat_ghost.wav'
+const soundDot = './static/assets/Sounds/pacman/munch.wav'
+const soundPill = './static/assets/Sounds/pacman/pill.wav'
+const soundStart = './static/assets/Sounds/pacman/game_start.wav'
+const soundGameOver = './static/assets/Sounds/pacman/death.wav'
+const soundGhost = './static/assets/Sounds/pacman/eat_ghost.wav'
 
 //#endregion
 
