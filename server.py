@@ -198,7 +198,7 @@ def spider(page_name=None):
 def pacman(page_name=None):
     return render_template('pacman.html')
 
-@app.route('/lobos')
+@app.route('/Lobo')
 def lobos(page_name=None):
     return redirect('https://pt.wikipedia.org/wiki/Lobo')
 
