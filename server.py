@@ -2,8 +2,8 @@ from flask import Flask, render_template, request, redirect
 from projects.sudoku import solve_sudoku
 from projects.checkmypass import check_pass
 from projects.email_sender import send_email
-from projects.ISEE.PFC import soluciona_PFC_NR, soluciona_PFC_desacoplado, print_results
-from projects.ISEE.txt_functions import configure_text_matriz, print_matriz
+from projects.ISEE.PFC import soluciona_PFC_NR, soluciona_PFC_desacoplado
+from projects.ISEE.txt_functions import configure_text_matriz
 from random import choice, shuffle
 from numpy import rad2deg
 import csv
@@ -197,6 +197,10 @@ def spider(page_name=None):
 @app.route('/pacman')
 def pacman(page_name=None):
     return render_template('pacman.html')
+
+@app.route('/lobos')
+def lobos(page_name=None):
+    return redirect('https://pt.wikipedia.org/wiki/Lobo')
 
 
 @app.route('/<string:page_name>')
